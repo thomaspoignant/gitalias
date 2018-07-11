@@ -1,5 +1,5 @@
 # gitalias
-Some aliases to use for git
+Some alias very useful
 
 ## alias
 
