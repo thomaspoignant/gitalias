@@ -37,3 +37,17 @@ Display a inline status of your git status
 ```sh
 s = !git status -sb && git submodule foreach --recursive git status -sb
 ```
+
+### git publish
+Push the current branch to the remote "origin", and set it to track
+
+```sh
+publish = "!git push -u origin $(git branch-name)"
+```
+
+### git unpublish
+Delete the remote version of the current branch
+
+```sh
+unpublish = "!git push origin :$(git branch-name)"
+```
