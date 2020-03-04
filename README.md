@@ -72,7 +72,6 @@ git clone https://github.com/thomaspoignant/gitalias.git && echo -e "[include]\n
   # Checkout their version of a file and add it
   theirs = "!f() { git checkout --theirs $@ && git add $@; }; f"\
 
-  # Delete any branches that have been merged into master
-  # See also: https://gist.github.com/robmiller/5133264
-  delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"\
+  # Cleanup local branch
+  branch-cleanup = "!git fetch origin --prune && git branch --merged origin/master | grep -v 'master$' | xargs git branch -d"
 ```
