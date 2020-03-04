@@ -1,8 +1,7 @@
 # gitalias
-Some alias very useful
+Some great aliases to make your life easier when using GIT command line
 
 ## Install the alias
-
 To install just run this command line and it will add all these aliases to your `.gitconfig` file.
 
 ```sh
