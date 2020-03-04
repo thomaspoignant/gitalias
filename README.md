@@ -11,7 +11,7 @@ git clone https://github.com/thomaspoignant/gitalias.git && echo -e "[include]\n
 
 ## aliases
 
-```sh
+```properties
 [alias]
   #print log 
   ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate
