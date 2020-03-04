@@ -1,44 +1,23 @@
 [alias]
+
+  #print log 
+  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate
+  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate --numstat
+
   # fetch and rebase current branch
-  fr = "!f() { \
-      trap 'echo ERROR: Operation failed; return' ERR; \
-      \
-      echo ---- Fetching on branch $(git branch-name) ----;\
-      git fetch;\
-      echo ---- Rebasing branch $(git branch-name) ----;\
-      git rebase;\
-    }; \
-    f"\
-    
-  # switch to branch X and rebase it
-  switch = "!f() { \
-      trap 'echo ERROR: Operation failed; return' ERR; \
-      \
-      [ -z \"$1\" ] && echo \"branch name required, e.g develop, master, feature/XXX, ...\" && exit 1; \
-      echo ---- Switching to branch $1 ----; \
-      git checkout $1;\
-      git fr;\
-    }; \
-    f"\
-    
+  fr = "!git fetch && git rebase"
+
+  # add and commit
+  ac = "!git add -p && git commit -m "
+
   # full status
   s = !git status -sb && git submodule foreach --recursive git status -sb \
 
-  #
-  # Working with branches
-  #
-  # Get the current branch name (not so useful in itself, but used in
-  # other aliases)
-  branch-name = "!git rev-parse --abbrev-ref HEAD"
-  # Push the current branch to the remote "origin", and set it to track
-  # the upstream branch
+  # Push the current branch to the remote "origin", and set it to track the upstream branch
   publish = "!git push -u origin $(git branch-name)"
+
   # Delete the remote version of the current branch
   unpublish = "!git push origin :$(git branch-name)"
-  # Delete a branch and recreate it from master — useful if you have, say,
-  # a development branch and a master branch and they could conceivably go
-  # out of sync
-  recreate = "!f() { [[ -n $@ ]] && git checkout \"$@\" && git unpublish && git checkout master && git branch -D \"$@\" && git checkout -b \"$@\" && git publish; }; f" \
 
   # Fire up your difftool (e.g. Kaleidescope) with all the changes that
   # are on the current branch.
@@ -50,21 +29,22 @@
 
   # Find the commits that were introduced by a merge
   merge-log = "!git log `git merge-span .. $1`"
+
   # Show the changes that were introduced by a merge
   merge-diff = "!git diff `git merge-span ... $1`"
+
   # As above, but in your difftool
   merge-difftool = "!git difftool `git merge-span ... $1`" \
 
   # Interactively rebase all the commits on the current branch
   rebase-branch = "!git rebase -i `git merge-base master HEAD`" \
 
-  # =====================
-  # Working with files
-  # =====================
   # Unstage any files that have been added to the staging area
   unstage = reset HEAD
+
   # Show changes that have been staged
   diffc = diff --cached
+
   # Mark a file as "assume unchanged", which means that Git will treat it
   # as though there are no changes to it even if there are. Useful for
   # temporary changes to tracked files
@@ -83,6 +63,4 @@
   # See also: https://gist.github.com/robmiller/5133264
   delete-merged-branches = "!git co master && git branch --merged | grep -v '\\*' | xargs -n 1 git branch -d"\
 
-  #print log 
-  ls = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate
-  ll = log --pretty=format:"%C(yellow)%h%Cred%d\\ %Creset%s%Cgreen\\ [%cn]" --decorate --numstat
+  
