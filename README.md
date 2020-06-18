@@ -26,10 +26,10 @@ git clone https://github.com/thomaspoignant/gitalias.git && echo -e "[include]\n
   s = !git status -sb && git submodule foreach --recursive git status -sb \
 
   # Push the current branch to the remote "origin", and set it to track the upstream branch
-  publish = "!git push -u origin $(git branch-name)"
+  publish = "!git push -u origin $(git branch --show-current)"
 
   # Delete the remote version of the current branch
-  unpublish = "!git push origin :$(git branch-name)"
+  unpublish = "!git push origin :$(git branch --show-current)"
 
   # Fire up your difftool (e.g. Kaleidescope) with all the changes that
   # are on the current branch.
