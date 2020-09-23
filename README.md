@@ -73,4 +73,12 @@ git clone https://github.com/thomaspoignant/gitalias.git && echo -e "[include]\n
 
   # Cleanup local branch
   branch-cleanup = "!git fetch origin --prune && git branch --merged origin/master | grep -v 'master$' | xargs git branch -d"
+  
+  # Checkout short version
+  co = checkout
+  # Checkout and create a new branch
+  cob = checkout -b
+
+  # HEAD
+  head = reset --hard HEAD
 ```
