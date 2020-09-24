@@ -81,4 +81,7 @@ git clone https://github.com/thomaspoignant/gitalias.git && echo -e "[include]\n
 
   # HEAD
   head = reset --hard HEAD
+  
+  # Commit with message
+  c = commit -m
 ```
