@@ -70,3 +70,6 @@
 
   # HEAD
   head = reset --hard HEAD
+  
+  # Commit with message
+  c = commit -m
